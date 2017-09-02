@@ -92,7 +92,26 @@ function dropDirective($parse) {
         domElement.removeEventListener('dragleave', removeDragOverClass);
       });
 
+
+      var hasExitted = false;
+      var throttledListener = _.throttle(function handle(event) {
+          // If drag has since left area, do not still process dragover.
+          if(!hasExitted) {
+            exitted = false;
+            handleDragOver(event);
+          }
+        }, 16, { 'trailing': false, 'leading': true });
+
       function dragOverListener(event) {
+        hasExitted = false;
+        
+        // Prevent default to accept drag and drop.
+        event.preventDefault();
+
+        throttledListener(event);
+      }
+
+      function handleDragOver(event) {
         // Check if type is accepted.
         if (! accepts(scope.$eval(dropAccept), event)) return true;
 
@@ -106,8 +125,7 @@ function dropDirective($parse) {
           dragOverHandler(scope, { $event: event });
         });
 
-        // Prevent default to accept drag and drop.
-        event.preventDefault();
+
       }
 
       function dropListener(event) {
@@ -129,6 +147,7 @@ function dropDirective($parse) {
        */
 
       function removeDragOverClass() {
+        hasExitted = true;
         element.removeClass(dragOverClass);
       }
 
