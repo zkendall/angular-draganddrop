@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/neoziro/angular-draganddrop.git"
+    "url": "git://github.com/zkendall/angular-draganddrop.git"
   },
   "keywords": [
     "drag",
@@ -20,7 +20,7 @@
   "author": "Greg Bergé <berge.greg@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/neoziro/angular-draganddrop/issues"
+    "url": "https://github.com/zkendall/angular-draganddrop/issues"
   },
   "devDependencies": {
     "chai": "^1.9.1",
